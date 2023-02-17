@@ -10,7 +10,7 @@
 > returnerer disse som en liste(NB. Husk å fjerne disse kortene fra kortstokken).
 > Class'en skal inneholde funksjonen «del_ut» som deler ut
 > p antall hender med n antall kort i hver hand(returnerer en liste av lister).
-> Class'en skal også inneholde funksjonen **str** som returnerer en tekst string av resterende kortstokk."
+> Class'en skal også inneholde funksjonen `__str__` som returnerer en tekst string av resterende kortstokk."
 
 ## Utfordring: Lag spillet «vri åtter(Olsen)» med følgende regler:
 
