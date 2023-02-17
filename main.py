@@ -1,5 +1,5 @@
 '''
-Oppgave kortstokk(middels / høy måloppnåelse)
+Oppgave: kortstokk(middels / høy måloppnåelse)
 En kortstokk i Python kan representeres som en liste på følgende måte:
 ["A", "2", "3", . . ., "10", "J", "Q", "K"]
 Sortene representeres som bokstavene K(Kløver), S(Spar), H(Hjerter), R(ruter).
@@ -13,65 +13,129 @@ p antall hender med n antall kort i hver hand(returnerer en liste av lister).
 Class'en skal også inneholde funksjonen __str__ som returnerer en tekst string av resterende kortstokk.
 '''
 
+'''
+Hvorfor har jeg valg å kode slik jeg har kodet?
+I denne oppgaven har jeg valgt å bruke objekt orientert programmering mye mer enn jeg testet tidligere.
+Det vil si at jeg har laget funksjoner som kun har en oppgave, og som kan brukes flere ganger, istedenfor å ha flere store funksjoner som gjør mye.
+Jeg så også en video nylig som handlet om såkalte "Never nesters".
+det er kodere som velger å ikke ha loops inne i loops (nesting), bruker "early returns", extraction og aldri bruker mer enn 3-4 nivåer/indents.
+Dette er noe jeg har prøvd å følge i denne oppgaven, og jeg synes det er mye mer oversiktlig og ryddig.
+link til videoen: https://www.youtube.com/watch?v=CFRhGnuXG-4
+
+jeg bruker også en del "private" funksjoner, som ikke er ment å brukes utenfor klassen, definert ved __funksjonsnavn.
+Variablene i klassen er også private, definert ved _variabelnavn.
+
+Det står ikke i oppgaveteksten at vi skal inkludere muligheten for å plassere flere kort samtidig, så jeg har valgt å ikke inkludere det.
+'''
+
+
+
+
 import random
-
-
+from time import sleep
 class Kortstokk:
-    def __init__(self):
+    # initialiserer kortstokken med 52 kort og stokker kortstokken
+    def __init__(self) -> None:
         self._kortstokk = [f"{verdi}{sort}" for verdi in ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
                            for sort in ["K", "S", "H", "R"]]
         random.shuffle(self._kortstokk)
 
-    def haand(self, antallDeleUt):
-        if antallDeleUt > len(self._kortstokk):
+    # deler ut n kort fra kortstokken og returnerer den som en liste over kort i "hånden"
+    # sjekker om det er nok kort i kortstokken
+    # hvis ikke, kastes en ValueError
+    # ellers, deler ut n kort fra kortstokken og fjernen kortet fra kortstokken
+    # returnerer kortene i hånden -> list
+    def haand(self, antallKort) -> list:
+        if antallKort > len(self._kortstokk):
             raise ValueError("Ikke nok kort i kortstokken")
-        hand = [self._kortstokk.pop() for _ in range(antallDeleUt)]
+        hand = [self._kortstokk.pop() for _ in range(antallKort)]
         return hand
 
-    def del_ut(self, hender, kortPerHaand):
+    # deler ut p antall hender med n antall kort per hånd
+    # sjekker om det er nok kort i kortstokken for å dele ut
+    # hvis ikke, kastes en ValueError
+    # ellers, deler ut n antall hender med n antall kort per hånd
+    # returnerer hender -> 2D-list
+    def del_ut(self, hender, kortPerHaand) -> list:
         if hender * kortPerHaand > len(self._kortstokk):
             raise ValueError("produkt av hender og kortPerHaand er større enn antall kort i kortstokken")
         hender = [self.haand(kortPerHaand) for _ in range(hender)]
         return hender
 
-    def __str__(self):
+    # returnerer en tekst string av resterende kortstokk
+    def __str__(self) -> str:
         return ", ".join(self._kortstokk)
 
 
 class Olsen:
-    def __init__(self, kortstokk, spillere):
-        self._kortstokkObj = kortstokk()
-        self._kortstokk = self._kortstokkObj._kortstokk
-        self._haand = self._kortstokkObj.del_ut(spillere, 5)
-        self._kastehaugen = random.choice(self._kortstokk)
-        self._kortstokk.remove(self._kastehaugen)
+    def __init__(self, kortstokk, spillere, kortPerHaand) -> None:
+        self._kortstokk = kortstokk()
+        self._haand = self._kortstokk.del_ut(spillere, kortPerHaand)
+        self._kortstokk = self._kortstokk._kortstokk
+        self._kastehaugen = self._kortstokk.pop()
+        # self._kortstokk.remove(self._kastehaugen)
         self._spillere = spillere
+        self._spiller = 0
+        self._harVunnet = False
 
-        print(self._kastehaugen)
-        print(len(self._kortstokk))
-        print(len(self._haand[0]), len(self._haand[1]))
+        self.__clearTerminal()
+        self.__spill()
 
-    def spill(self):
-        pass
+    def __clearTerminal(self):
+        print("\033c")
+
+    def __hasWon(self, spiller):
+        if len(self._haand[spiller]) == 0:
+            self._harVunnet = True
+            self.__clearTerminal()
+            print(f"Spiller {spiller + 1} har vunnet!")
+
+    def __getAndCheckInput(self, spiller):
+        valg = input("Velg et kort fra hånden din [eks: K2]\n>>> ").upper()
+        if not valg[0].isalpha():
+            print("Feil syntaks. Prøv igjen")
+            sleep(1)
+            self.__getAndCheckInput(spiller)
+        self.__check_legal_move(valg, spiller)
+
+    def __check_legal_move(self, valg, spiller):
+        if valg not in self._haand[spiller]:
+            print("Du har ikke dette kortet i hånden din")
+            return
+
+    def __make_move(self):
+        for spiller in range(self._spillere):
+            self._spiller = spiller
+            print(f"Spiller {spiller + 1} sin tur")
+            print(f"Øverste kort i kastehaugen: {self._kastehaugen}")
+            print(f"Spiller {spiller + 1} sin hånd: {self._haand[spiller]}")
+            self.__getAndCheckInput(spiller)
+
+    def __spill(self):
+        while not self._harVunnet:
+            self.__clearTerminal()
+            self.__hasWon(self._spiller)
+            self.__make_move()
 
 
-# clear terminal
-print("\033c")
+# lager en instans av Olsen
 olsen = Olsen(Kortstokk, 2)
-
 '''
 Utfordring:
 Lag spillet «vri åtter(Olsen)» med følgende regler:
 Hver spiller skal få utdelt en hånd med 5 kort fra en stokket kortstokk.
 Deretter flippes det øverste kortet fra kortstokken og lager en ny kortstokk der kortene vender oppover.
+
 Hver spiller plasserer et kort oppå den nye kortstokken etter følgende regler:
-(i) kort med samme farge som kortet som ligger synlig,
-eller(ii) kort med samme verdi som kortet som ligger synlig,
-eller(iii) kort med verdi åtte kan bestandig spilles. Spilleren som spiller en åtter for da
-velge fargen på kortet.
+(i) kort med samme farge som kortet som ligger synlig, eller:
+(ii) kort med samme verdi som kortet som ligger synlig, eller:
+(iii) kort med verdi åtte kan bestandig spilles. Spilleren som spiller en åtter får da velge fargen på kortet.
+
 En spiller som ikke har noen lovlige kort å spille må trekke inn ett kort.
 Dette kan gjøres opp til tre ganger per runde før spilleren må melde pass.
+
 Vinneren av spillet er den som først blir kvitt alle kortene.
+
 Bruk Class kortstokk i implementasjon.
 Presenter for hver spiller når det er deres tur samt en liste av hånden deres.
 Dere må også presentere for spilleren hvilken kort som ligger øverst på dette tidspunktet.
