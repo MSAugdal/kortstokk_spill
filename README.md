@@ -1,6 +1,6 @@
 # Oppgave: kortstokk(middels / høy måloppnåelse)
 
-> "En kortstokk i Python kan representeres som en liste på følgende måte:
+> En kortstokk i Python kan representeres som en liste på følgende måte:
 > ["A", "2", "3", . . ., "10", "J", "Q", "K"]
 > Sortene representeres som bokstavene K(Kløver), S(Spar), H(Hjerter), R(ruter).
 > For eksempel representeres sparess som "SA" og hjerter seks som "H6".
@@ -10,7 +10,7 @@
 > returnerer disse som en liste(NB. Husk å fjerne disse kortene fra kortstokken).
 > Class'en skal inneholde funksjonen «del_ut» som deler ut
 > p antall hender med n antall kort i hver hand(returnerer en liste av lister).
-> Class'en skal også inneholde funksjonen `__str__` som returnerer en tekst string av resterende kortstokk."
+> Class'en skal også inneholde funksjonen **`__str__`** som returnerer en tekst string av resterende kortstokk.
 
 ## Utfordring: Lag spillet «vri åtter(Olsen)» med følgende regler:
 
@@ -33,7 +33,7 @@
 > Undersøk om kortet som spilleren spiller er et lovlig kort,
 > og tilby spilleren muligheten til å trekke inn ett kort(men bare tre ganger per runde for hver spiller).
 > Etter at spilleren har trukket inn 3 kort i en runde skal spilleren
-> bli presentert med muligheten til å si pass (ikke spille noen kort)."
+> bli presentert med muligheten til å si pass (ikke spille noen kort).
 
 ## Hvorfor har jeg valg å kode slik jeg har kodet?
 
@@ -44,7 +44,7 @@ det er kodere som velger å ikke ha loops inne i loops (nesting), bruker "early 
 Dette er noe jeg har prøvd å følge i denne oppgaven, og jeg synes det er mye mer oversiktlig og ryddig.
 link til videoen: https://www.youtube.com/watch?v=CFRhGnuXG-4
 
-jeg bruker også en del "private" funksjoner, som ikke er ment å brukes utenfor klassen, definert ved \_\_funksjonsnavn.
-Variablene i klassen er også private, definert ved \_variabelnavn.
+jeg bruker også en del "private" funksjoner, som ikke er ment å brukes utenfor klassen, definert ved **`__funksjonsnavn`**.
+Variablene i klassen er også private, definert ved **`_variabelnavn`**.
 
 Det står ikke i oppgaveteksten at vi skal inkludere muligheten for å plassere flere kort samtidig, så jeg har valgt å ikke inkludere det.
