@@ -1,38 +1,7 @@
-'''
-Oppgave: kortstokk(middels / høy måloppnåelse)
-En kortstokk i Python kan representeres som en liste på følgende måte:
-["A", "2", "3", . . ., "10", "J", "Q", "K"]
-Sortene representeres som bokstavene K(Kløver), S(Spar), H(Hjerter), R(ruter).
-For eksempel representeres sparess som "SA" og hjerter seks som "H6".
-Dere skal lage en Class som lager en kortstokk med 52 kort representert i en liste.
-Kortstokken skal være stokket(bruk biblioteket «random» for dette).
-I tillegg skal Class'en inneholde funksjon «haand» som deler ut n kort fra kortstokken og
-returnerer disse som en liste(NB. Husk å fjerne disse kortene fra kortstokken).
-Class'en skal inneholde funksjonen «del_ut» som deler ut
-p antall hender med n antall kort i hver hand(returnerer en liste av lister).
-Class'en skal også inneholde funksjonen __str__ som returnerer en tekst string av resterende kortstokk.
-'''
-
-'''
-Hvorfor har jeg valg å kode slik jeg har kodet?
-I denne oppgaven har jeg valgt å bruke objekt orientert programmering mye mer enn jeg testet tidligere.
-Det vil si at jeg har laget funksjoner som kun har en oppgave, og som kan brukes flere ganger, istedenfor å ha flere store funksjoner som gjør mye.
-Jeg så også en video nylig som handlet om såkalte "Never nesters".
-det er kodere som velger å ikke ha loops inne i loops (nesting), bruker "early returns", extraction og aldri bruker mer enn 3-4 nivåer/indents.
-Dette er noe jeg har prøvd å følge i denne oppgaven, og jeg synes det er mye mer oversiktlig og ryddig.
-link til videoen: https://www.youtube.com/watch?v=CFRhGnuXG-4
-
-jeg bruker også en del "private" funksjoner, som ikke er ment å brukes utenfor klassen, definert ved __funksjonsnavn.
-Variablene i klassen er også private, definert ved _variabelnavn.
-
-Det står ikke i oppgaveteksten at vi skal inkludere muligheten for å plassere flere kort samtidig, så jeg har valgt å ikke inkludere det.
-'''
-
-
-
-
 import random
 from time import sleep
+
+
 class Kortstokk:
     # initialiserer kortstokken med 52 kort og stokker kortstokken
     def __init__(self) -> None:
