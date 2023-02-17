@@ -12,7 +12,7 @@
 ## Oppgave: kortstokk(middels / høy måloppnåelse)
 
 > En kortstokk i Python kan representeres som en liste på følgende måte:  
-> ["A", "2", "3", . . ., "10", "J", "Q", "K"] .
+> ["A", "2", "3", . . ., "10", "J", "Q", "K"]  
 > Sortene representeres som bokstavene K(Kløver), S(Spar), H(Hjerter), R(ruter).  
 > For eksempel representeres sparess som "SA" og hjerter seks som "H6".  
 > Dere skal lage en Class som lager en kortstokk med 52 kort representert i en liste.  
