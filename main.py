@@ -6,11 +6,11 @@ Sortene representeres som bokstavene K(Kløver), S(Spar), H(Hjerter), R(ruter).
 For eksempel representeres sparess som "SA" og hjerter seks som "H6".
 Dere skal lage en Class som lager en kortstokk med 52 kort representert i en liste.
 Kortstokken skal være stokket(bruk biblioteket «random» for dette).
-I tillegg skal Class’en inneholde funksjon «haand» som deler ut n kort fra kortstokken og
+I tillegg skal Class'en inneholde funksjon «haand» som deler ut n kort fra kortstokken og
 returnerer disse som en liste(NB. Husk å fjerne disse kortene fra kortstokken).
-Class’en skal inneholde funksjonen «del_ut» som deler ut
+Class'en skal inneholde funksjonen «del_ut» som deler ut
 p antall hender med n antall kort i hver hand(returnerer en liste av lister).
-Class’en skal også inneholde funksjonen __str__ som returnerer en tekst string av resterende kortstokk.
+Class'en skal også inneholde funksjonen __str__ som returnerer en tekst string av resterende kortstokk.
 '''
 
 import random
@@ -43,13 +43,20 @@ class Olsen:
         self._kortstokkObj = kortstokk()
         self._kortstokk = self._kortstokkObj._kortstokk
         self._haand = self._kortstokkObj.del_ut(spillere, 5)
-        self._nyKortstokk = [random.choice(self._kortstokk)]
-        self._kortstokk.remove(self._nyKortstokk[-1])
-        print(self._nyKortstokk)
+        self._kastehaugen = random.choice(self._kortstokk)
+        self._kortstokk.remove(self._kastehaugen)
+        self._spillere = spillere
+
+        print(self._kastehaugen)
         print(len(self._kortstokk))
         print(len(self._haand[0]), len(self._haand[1]))
 
+    def spill(self):
+        pass
 
+
+# clear terminal
+print("\033c")
 olsen = Olsen(Kortstokk, 2)
 
 '''
