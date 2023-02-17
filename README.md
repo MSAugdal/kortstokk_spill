@@ -1,4 +1,15 @@
-# Oppgave: kortstokk(middels / høy måloppnåelse)
+# Python innlevering: Lag et spill
+
+## Oppgaven blir vurdert ut fra følgende kriterier:
+
+-   Struktur, kommentarer og lesbarhet på koden
+-   Egen forståelse av koden
+-   Hvorvidt programmet fungerer som forventet
+-   Brukervennlighet
+-   Hvorvidt koden inneholder uhensiktsmessige kodelinjer (DRY-prinsippet)
+-   Korrekt innlevering
+
+## Oppgave: kortstokk(middels / høy måloppnåelse)
 
 > En kortstokk i Python kan representeres som en liste på følgende måte:
 > ["A", "2", "3", . . ., "10", "J", "Q", "K"]
@@ -35,13 +46,13 @@
 > Etter at spilleren har trukket inn 3 kort i en runde skal spilleren
 > bli presentert med muligheten til å si pass (ikke spille noen kort).
 
-## Hvorfor har jeg valg å kode slik jeg har kodet?
+## Hvorfor har jeg valgt å kode slik jeg har kodet?
 
 I denne oppgaven har jeg valgt å bruke objekt orientert programmering mye mer enn jeg testet tidligere.
 Det vil si at jeg har laget funksjoner som kun har en oppgave, og som kan brukes flere ganger, istedenfor å ha flere store funksjoner som gjør mye.
 Jeg så også en video nylig som handlet om såkalte "Never nesters".
 det er kodere som velger å ikke ha loops inne i loops (nesting), bruker "early returns", extraction og aldri bruker mer enn 3-4 nivåer/indents.
-Dette er noe jeg har prøvd å følge i denne oppgaven, og jeg synes det er mye mer oversiktlig og ryddig.
+Dette er noe jeg har prøvd å følge i denne oppgaven, og jeg synes det er mye mer oversiktlig og ryddig.  
 link til videoen: https://www.youtube.com/watch?v=CFRhGnuXG-4
 
 jeg bruker også en del "private" funksjoner, som ikke er ment å brukes utenfor klassen, definert ved **`__funksjonsnavn`**.
