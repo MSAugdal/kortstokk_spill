@@ -37,12 +37,18 @@ class Kortstokk:
 
 
 class Olsen:
+    # initialiserer klassen med en kortstokk, antall spillere og antall kort per hånd
+    # kortstokken blir delt ut til alle spillere
+    # det øverste kortet i kortstokken blir lagt i kastehaugen
+    # spiller 0 sin tur
+    # harVunnet blir satt til False
+    # terminalen blir tømt
+    # spillet starter
     def __init__(self, kortstokk, spillere, kortPerHaand) -> None:
         self._kortstokk = kortstokk()
         self._haand = self._kortstokk.del_ut(spillere, kortPerHaand)
         self._kortstokk = self._kortstokk._kortstokk
         self._kastehaugen = self._kortstokk.pop()
-        # self._kortstokk.remove(self._kastehaugen)
         self._spillere = spillere
         self._spiller = 0
         self._harVunnet = False
@@ -50,15 +56,25 @@ class Olsen:
         self.__clearTerminal()
         self.__spill()
 
+    # tømmer terminalen med en escape sequence
+    # \033c er ESC c i ASCII, og vil tømme terminalen
     def __clearTerminal(self):
         print("\033c")
 
+    # sjekker om spilleren har vunnet
+    # hvis spilleren har vunnet, blir harVunnet satt til True
+    # terminalen blir tømt
+    # spilleren som har vunnet blir printet ut
     def __hasWon(self, spiller):
         if len(self._haand[spiller]) == 0:
             self._harVunnet = True
             self.__clearTerminal()
             print(f"Spiller {spiller + 1} har vunnet!")
 
+    # sjekker om inputen er gyldig (eks: K2, H10, S3, RQ og ikke K22, H1 eller 1K)
+    # sjekker at første karakter er en bokstav
+    # hvis gyldig, sjekker den om spilleren har kortet i hånden
+    # hvis inputen ikke er gyldig, blir spilleren bedt om å prøve igjen
     def __getAndCheckInput(self, spiller):
         valg = input("Velg et kort fra hånden din [eks: K2]\n>>> ").upper()
         if not valg[0].isalpha():
@@ -67,11 +83,21 @@ class Olsen:
             self.__getAndCheckInput(spiller)
         self.__check_legal_move(valg, spiller)
 
+    # sjekker om spilleren har kortet i hånden
+    # fjerner kortet fra hånden og legger det i kastehaugen hvis spilleren har kortet
+    # hvis ikke, blir spilleren bedt om å prøve igjen
     def __check_legal_move(self, valg, spiller):
         if valg not in self._haand[spiller]:
             print("Du har ikke dette kortet i hånden din")
-            return
+            sleep(1)
+            self.__getAndCheckInput(spiller)
+        self._haand[spiller].remove(valg)
+        self._kastehaugen = valg
 
+    # forteller spilleren at det er deres tur
+    # printer ut øverste kort i kastehaugen
+    # printer ut spillerens hånd
+    # kaller på __getAndCheckInput for å få input fra spilleren
     def __make_move(self):
         for spiller in range(self._spillere):
             self._spiller = spiller
@@ -80,6 +106,7 @@ class Olsen:
             print(f"Spiller {spiller + 1} sin hånd: {self._haand[spiller]}")
             self.__getAndCheckInput(spiller)
 
+    # starter spillet så lenge harVunnet er False
     def __spill(self):
         while not self._harVunnet:
             self.__clearTerminal()
@@ -89,27 +116,3 @@ class Olsen:
 
 # lager en instans av Olsen
 olsen = Olsen(Kortstokk, 2)
-'''
-Utfordring:
-Lag spillet «vri åtter(Olsen)» med følgende regler:
-Hver spiller skal få utdelt en hånd med 5 kort fra en stokket kortstokk.
-Deretter flippes det øverste kortet fra kortstokken og lager en ny kortstokk der kortene vender oppover.
-
-Hver spiller plasserer et kort oppå den nye kortstokken etter følgende regler:
-(i) kort med samme farge som kortet som ligger synlig, eller:
-(ii) kort med samme verdi som kortet som ligger synlig, eller:
-(iii) kort med verdi åtte kan bestandig spilles. Spilleren som spiller en åtter får da velge fargen på kortet.
-
-En spiller som ikke har noen lovlige kort å spille må trekke inn ett kort.
-Dette kan gjøres opp til tre ganger per runde før spilleren må melde pass.
-
-Vinneren av spillet er den som først blir kvitt alle kortene.
-
-Bruk Class kortstokk i implementasjon.
-Presenter for hver spiller når det er deres tur samt en liste av hånden deres.
-Dere må også presentere for spilleren hvilken kort som ligger øverst på dette tidspunktet.
-Undersøk om kortet som spilleren spiller er et lovlig kort,
-og tilby spilleren muligheten til å trekke inn ett kort(men bare tre ganger per runde for hver spiller).
-Etter at spilleren har trukket inn 3 kort i en runde skal spilleren
-bli presentert med muligheten til å si pass (ikke spille noen kort).
-'''
