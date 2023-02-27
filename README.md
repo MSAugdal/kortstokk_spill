@@ -98,6 +98,6 @@ Måten du bruker programmet Olsen på er følgende:
 
 ## Credits where credits due
 
-Video om "never nesting": https://www.youtube.com/watch?v=CFRhGnuXG-4
-Artikkel om "early return pattern": https://medium.com/swlh/return-early-pattern-3d18a41bba8
+Video om "never nesting": https://www.youtube.com/watch?v=CFRhGnuXG-4  
+Artikkel om "early return pattern": https://medium.com/swlh/return-early-pattern-3d18a41bba8  
 Artikkel om hvordan skrive README: https://www.freecodecamp.org/news/how-to-write-a-good-readme-file/
