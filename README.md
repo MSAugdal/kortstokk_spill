@@ -79,10 +79,10 @@ Selv om det ofte ser ut til å være ganske rett frem å programmere det, ender 
 
 Her lister jeg opp et par av utfordringene jeg møtte på under utviklingen:
 
-> Hvordan skal jeg holde styr på hvor mange ganger spilleren har trukket inn et kort?
-> Hvordan skal jeg strukturere programmet slik at det fungerer med stilen jeg har valgt å bruke?
-> Hva skal være en egen modul og hva kan være bakt sammen?
-> Logikken bak spillet. hvordan skal alt struktureres og hvordan skal "flyten" av spillet være?
+-   Hvordan skal jeg holde styr på hvor mange ganger spilleren har trukket inn et kort?
+-   Hvordan skal jeg strukturere programmet slik at det fungerer med stilen jeg har valgt å bruke?
+-   Hva skal være en egen modul og hva kan være bakt sammen?
+-   Logikken bak spillet. hvordan skal alt struktureres og hvordan skal "flyten" av spillet være?
 
 Alle utfordringer ovenfor ble etter hvert løst, og programmet er på et punkt hvor jeg føler meg veldig fornøyd med det.
 
