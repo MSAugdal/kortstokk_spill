@@ -94,7 +94,7 @@ Måten du bruker programmet Olsen på er følgende:
 2. Åpne **`main.py`**
 3. I linjen: **`Olsen(Kortstokk, 2, 5)`** endrer du **`2`** til antall spillere i spillet, og **`5`** til hvilket som helst antall kort per hånd
 4. Pass på at antall hender \* antall kort per hånd ikke er mer enn 52 (Antall kort i kortstokken)
-5. **Have fun!**🥳
+5. **Have fun!** 🥳
 
 ## Credits where credits due
 
