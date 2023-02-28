@@ -14,8 +14,6 @@ class Kortstokk:
     # ellers, deler ut n kort fra kortstokken og fjernen kortet fra kortstokken
     # returnerer kortene i hånden -> list
     def __haand(self, antallKort) -> list:
-        # if antallKort > len(self._kortstokk):
-        #     raise ValueError("Ikke nok kort i kortstokken")
         hand = [self._kortstokk.pop() for _ in range(antallKort)]
         return hand
 
