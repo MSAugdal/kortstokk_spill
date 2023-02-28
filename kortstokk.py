@@ -22,7 +22,7 @@ class Kortstokk:
     # hvis ikke, kastes en ValueError
     # ellers, deler ut n antall hender med n antall kort per hånd
     # returnerer hender -> 2D-list
-    def __del_ut(self, hender, kortPerHaand) -> list:
+    def del_ut(self, hender, kortPerHaand) -> list:
         if hender * kortPerHaand > len(self._kortstokk):
             raise ValueError("produkt av hender og kortPerHaand er større enn antall kort i kortstokken")
         hender = [self.__haand(kortPerHaand) for _ in range(hender)]
